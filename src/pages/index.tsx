@@ -5,6 +5,7 @@ import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ChainId } from "@/constants/chains";
+import { Search } from "lucide-react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,20 +29,32 @@ export default function HomePage() {
     <Layout>
       <main
         className={cn(
-          "min-h-screen bg-background font-sans antialiased mt-24 flex flex-col justify-start items-center gap-8",
+          "min-h-[80vh]  font-sans antialiased mt-24 flex flex-col justify-start items-center gap-8",
           fontSans.variable
         )}
       >
-        <h1>Welcome to Transactions App</h1>
-        <p>This is a provisional landing page.</p>
+        <div className="text-center mt-16">
+          <h1 className="text-5xl font-bold">Welcome to Tx Checker App</h1>
+          <p className="mt-4 text-lg">
+            Effortlessly search and explore transactions and addresses.
+          </p>
+        </div>
 
-        <div className="md:flex justify-center items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-12">
           <Link href={`/address/${defaultChainId}/${defaultWallet}`}>
-            <Button className="ml-2">Search Address</Button>
+            <div className="bg-white text-black p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex flex-col justify-center items-center cursor-pointer">
+              <Search className="text-3xl mb-4" />
+              <Button className="text-lg font-semibold">Search Address</Button>
+            </div>
           </Link>
 
           <Link href={`/tx/${defaultChainId}/${defaultTx}`}>
-            <Button className="ml-2">Search Transaction</Button>
+            <div className="bg-white text-black p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex flex-col justify-center items-center cursor-pointer">
+              <Search className="text-3xl mb-4" />
+              <Button className="text-lg font-semibold">
+                Search Transaction
+              </Button>
+            </div>
           </Link>
         </div>
       </main>
