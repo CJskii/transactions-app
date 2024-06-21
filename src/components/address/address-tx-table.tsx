@@ -88,6 +88,13 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
+          {sortedTransactions.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={8} className="text-center">
+                No transactions found
+              </TableCell>
+            </TableRow>
+          )}
           {sortedTransactions.map((tx) => (
             <TableRow key={tx.hash}>
               <Link

@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 import { ChainId } from "@/pages";
 import { Typography } from "../ui/typography";
-import { SelectChainDropdown } from "@/components/select-chain";
 import { CHAINS } from "@/constants/chains";
 import { useTransactions } from "@/hooks/useTransactions";
 import { TransactionTable } from "./address-tx-table";
 import { BalanceComponent } from "./address-balance";
+import { Separator } from "@/components/ui/separator";
+import { SearchComponent } from "./address-search";
 
 export interface Transaction {
   blockNumber: string;
@@ -54,30 +55,31 @@ const AddressDetailsComponent = () => {
     }
   }, [chainId, address]);
 
-  const handleChainChange = (newChainId: number) => {
-    setSelectedChainId(newChainId);
-    if (selectedAddress) {
-      router.push(`/address/${newChainId}/${selectedAddress}`);
-    }
-  };
-
-  const selectedChainName =
-    CHAINS.find((chain) => chain.id === selectedChainId)?.name ||
-    "Select Chain";
-
   return (
     <Container>
-      <div className="flex flex-col justify-center items-center w-full">
-        <div className="flex flex-col justify-center items-center p-4 gap-4">
-          <Typography variant={"h3"}>Address: {address}</Typography>
-          <SelectChainDropdown
-            selectedChainName={selectedChainName}
-            chains={CHAINS}
-            onChange={handleChainChange}
-          />
+      <div className="flex flex-col justify-center items-center w-full md:mt-0 mt-12">
+        <div className="flex flex-col md:flex-row justify-start items-center p-4 gap-4 w-full">
+          <Typography variant={"h4"}>Address: </Typography>
+          <Typography
+            variant={"small"}
+            className="md:text-lg text-sm font-normal"
+          >
+            {selectedAddress}
+          </Typography>
         </div>
 
-        <BalanceComponent address={selectedAddress} chainId={selectedChainId} />
+        <Separator className="w-full" />
+
+        <div className="flex flex-col-reverse md:flex-row justify-between items-start md:gap-4 w-full">
+          <BalanceComponent
+            address={selectedAddress}
+            chainId={selectedChainId}
+          />
+          <SearchComponent
+            address={selectedAddress}
+            chainId={selectedChainId}
+          />
+        </div>
 
         {loading && <p>Loading transactions...</p>}
         {error && <p>Error fetching transactions: {error}</p>}
