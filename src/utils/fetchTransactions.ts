@@ -18,6 +18,8 @@ export const fetchTransactions = async (address: string, chainId: number) => {
       address,
       sort: "asc",
       apikey: apiKey,
+      page: 1,
+      offset: 100, // fetch only the first 100 transactions
     },
   });
 
