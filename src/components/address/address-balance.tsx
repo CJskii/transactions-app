@@ -2,6 +2,7 @@ import { useBalance } from "@/hooks/useBalance";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Separator } from "@radix-ui/react-separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface BalanceComponentProps {
   address: string;
@@ -22,10 +23,6 @@ export const BalanceComponent: React.FC<BalanceComponentProps> = ({
       ? `https://etherscan.io/address/${address}`
       : `https://polygonscan.com/address/${address}`;
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -37,6 +34,7 @@ export const BalanceComponent: React.FC<BalanceComponentProps> = ({
       nativeCurrency={nativeCurrency}
       explorerName={explorerName}
       explorerUrl={explorerUrl}
+      loading={loading}
     />
   );
 };
@@ -47,6 +45,7 @@ interface BalanceCardProps {
   nativeCurrency: string;
   explorerName: string;
   explorerUrl: string;
+  loading: boolean;
 }
 
 export const BalanceCard: React.FC<BalanceCardProps> = ({
@@ -55,6 +54,7 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({
   nativeCurrency,
   explorerName,
   explorerUrl,
+  loading,
 }) => {
   return (
     <Card className="overflow-hidden lg:w-2/6 md:w-3/6 w-full h-fit bg-transparent my-8">
@@ -69,23 +69,32 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({
           <ul className="grid gap-3">
             <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <span className="text-muted-foreground">Current network</span>
+
               <span className="">{networkName}</span>
             </li>
             <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <span className="text-muted-foreground">Balance</span>
-              <span className="break-all">
-                {balance} {nativeCurrency}{" "}
-              </span>
+              {loading ? (
+                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+              ) : (
+                <span className="break-all">
+                  {balance} {nativeCurrency}{" "}
+                </span>
+              )}
             </li>
             <li className="flex flex-col md:flex-row items-start md:items-center  justify-between">
               <span className="text-muted-foreground">{explorerName} link</span>
-              <Link
-                href={explorerUrl}
-                target="_blank"
-                className="hover:underline tranctuate "
-              >
-                View
-              </Link>
+              {loading ? (
+                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+              ) : (
+                <Link
+                  href={explorerUrl}
+                  target="_blank"
+                  className="hover:underline tranctuate "
+                >
+                  View
+                </Link>
+              )}
             </li>
           </ul>
         </div>

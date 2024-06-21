@@ -4,16 +4,12 @@ import { cn } from "@/lib/utils";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { ChainId } from "@/constants/chains";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
-export enum ChainId {
-  Mainnet = 1,
-  Polygon = 137,
-}
 
 export default function HomePage() {
   const [defaultWallet, setDefaultWallet] = useState<string | null>(

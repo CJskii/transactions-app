@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Typography } from "@/components/ui/typography";
 import { ethers } from "ethers";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 export interface TransactionDetails {
   blockNumber: string;
@@ -36,16 +38,21 @@ const TransactionDetailsComponent = () => {
     parseInt(chainId as string)
   );
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>Error: {error}</p>;
   }
 
   if (!transactionDetails) {
-    return <p>No transaction details found.</p>;
+    return (
+      <Container>
+        <div className="flex flex-col justify-center items-center mt-8 min-h-[50vh]">
+          <LoadingSpinner size={100} />
+          <Typography variant="small" className="text-muted-foreground">
+            Loading Transaction Details
+          </Typography>
+        </div>
+      </Container>
+    );
   }
 
   const {
@@ -104,59 +111,95 @@ const TransactionDetailsComponent = () => {
             <ul className="grid gap-3">
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">Transaction Hash</span>
-                <Link
-                  href={explorerUrl}
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  {transactionDetails.hash}
-                </Link>
+                {loading ? (
+                  <Skeleton className="w-[200px] h-[20px] rounded-full" />
+                ) : (
+                  <Link
+                    href={explorerUrl}
+                    target="_blank"
+                    className="hover:underline"
+                  >
+                    {transactionDetails.hash}
+                  </Link>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">Block Hash</span>
-                <span>{blockHash}</span>
+                {loading ? (
+                  <Skeleton className="w-[200px] h-[20px] rounded-full" />
+                ) : (
+                  <span>{blockHash}</span>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Block Number</span>
-                <span>{parseInt(blockNumber, 16)}</span>
+                {loading ? (
+                  <Skeleton className="w-[70px] h-[20px] rounded-full" />
+                ) : (
+                  <span>{parseInt(blockNumber, 16)}</span>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">From</span>
-                <Link
-                  href={`/address/${chainId}/${from}`}
-                  className="hover:underline"
-                >
-                  <span>{from}</span>
-                </Link>
+                {loading ? (
+                  <Skeleton className="w-[150px] h-[20px] rounded-full" />
+                ) : (
+                  <Link
+                    href={`/address/${chainId}/${from}`}
+                    className="hover:underline"
+                  >
+                    <span>{from}</span>
+                  </Link>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">To</span>
-                <Link
-                  href={`/address/${chainId}/${to}`}
-                  className="hover:underline"
-                >
-                  <span>{to}</span>
-                </Link>
+                {loading ? (
+                  <Skeleton className="w-[150px] h-[20px] rounded-full" />
+                ) : (
+                  <Link
+                    href={`/address/${chainId}/${to}`}
+                    className="hover:underline"
+                  >
+                    <span>{to}</span>
+                  </Link>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Value</span>
-                <span>
-                  {transactionValue} {nativeCurrency}
-                </span>
+                {loading ? (
+                  <Skeleton className="w-[70px] h-[20px] rounded-full" />
+                ) : (
+                  <span>
+                    {transactionValue} {nativeCurrency}
+                  </span>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Gas Used</span>
-                <span>{parseInt(gasUsed, 16)}</span>
+                {loading ? (
+                  <Skeleton className="w-[70px] h-[20px] rounded-full" />
+                ) : (
+                  <span>{parseInt(gasUsed, 16)}</span>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Gas Price</span>
-                <span>{ethers.utils.formatUnits(gasPrice, "gwei")} Gwei</span>
+                {loading ? (
+                  <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                ) : (
+                  <span>{ethers.utils.formatUnits(gasPrice, "gwei")} Gwei</span>
+                )}
               </li>
               <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Transaction Fee</span>
-                <span>
-                  {transactionFee} {nativeCurrency}
-                </span>
+                {loading ? (
+                  <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                ) : (
+                  <span>
+                    {transactionFee} {nativeCurrency}
+                  </span>
+                )}
               </li>
             </ul>
           </CardContent>
