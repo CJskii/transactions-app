@@ -1,25 +1,70 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Typography } from "./ui/typography";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { SelectChainDropdown } from "./select-chain";
+import { CHAINS } from "@/constants/chains";
 
 export function SiteHeader() {
+  const router = useRouter();
+  const [searchInput, setSearchInput] = useState("");
+  const [selectedChainId, setSelectedChainId] = useState(1);
+
+  const handleSearch = () => {
+    if (searchInput.length === 42 && searchInput.startsWith("0x")) {
+      router.push(`/address/${selectedChainId}/${searchInput}`);
+    } else if (searchInput.length === 66 && searchInput.startsWith("0x")) {
+      router.push(`/tx/${selectedChainId}/${searchInput}`);
+    } else {
+      router.push("/error");
+    }
+  };
+
+  const handleChainChange = (newChainId: number) => {
+    setSelectedChainId(newChainId);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const selectedChainName =
+    CHAINS.find((chain) => chain.id === selectedChainId)?.name ||
+    "Select Chain";
+
   return (
     <div className="fixed z-50 flex w-full justify-between items-center border-b border-neutral-400/50 bg-white/50 p-4 backdrop-blur-xl dark:bg-black/50 md:px-16 md:py-4">
-      <div className="flex-1 md:block">
+      <div className="flex-1 md:block hidden">
         <Link href={"/"}>
           <Typography variant="h2" className="text-2xl font-bold">
             Tx Checker
           </Typography>
         </Link>
       </div>
-      <Link href={"/"} className="md:hidden"></Link>
 
-      <div className="flex-1 justify-center hidden items-center gap-3 lg:flex">
+      <div className="flex-1 flex justify-center items-center gap-3">
         {/* Navi Links  */}
       </div>
 
-      <div className="flex-1  justify-end items-center gap-3 hidden  lg:flex"></div>
+      <div className="flex-1 justify-end items-center gap-3 lg:flex w-full">
+        <Input
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          placeholder="Enter address or transaction hash"
+          onKeyPress={handleKeyPress}
+        />
+        <SelectChainDropdown
+          selectedChainName={selectedChainName}
+          chains={CHAINS}
+          onChange={handleChainChange}
+        />
+        <Button onClick={handleSearch}>Search</Button>
+      </div>
     </div>
   );
 }

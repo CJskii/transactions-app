@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 
 import { ChainId } from "@/pages";
 import { Typography } from "../ui/typography";
-import { CHAINS } from "@/constants/chains";
 import { useTransactions } from "@/hooks/useTransactions";
 import { TransactionTable } from "./address-tx-table";
 import { BalanceComponent } from "./address-balance";
 import { Separator } from "@/components/ui/separator";
-import { SearchComponent } from "./address-search";
 
 export interface Transaction {
   blockNumber: string;
@@ -57,7 +55,7 @@ const AddressDetailsComponent = () => {
 
   return (
     <Container>
-      <div className="flex flex-col justify-center items-center w-full md:mt-0 mt-12">
+      <div className="flex flex-col justify-center items-center w-full md:mt-4 mt-12">
         <div className="flex flex-col md:flex-row justify-start items-center p-4 gap-4 w-full">
           <Typography variant={"h4"}>Address: </Typography>
           <Typography
@@ -72,10 +70,6 @@ const AddressDetailsComponent = () => {
 
         <div className="flex flex-col-reverse md:flex-row justify-between items-start md:gap-4 w-full">
           <BalanceComponent
-            address={selectedAddress}
-            chainId={selectedChainId}
-          />
-          <SearchComponent
             address={selectedAddress}
             chainId={selectedChainId}
           />
