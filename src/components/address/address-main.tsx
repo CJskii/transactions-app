@@ -2,12 +2,13 @@ import { Container } from "@/components/containter";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-import { ChainId } from "@/pages";
+import { ChainId } from "@/constants/chains";
 import { Typography } from "../ui/typography";
 import { useTransactions } from "@/hooks/useTransactions";
 import { TransactionTable } from "./address-tx-table";
 import { BalanceComponent } from "./address-balance";
 import { Separator } from "@/components/ui/separator";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 export interface Transaction {
   blockNumber: string;
@@ -75,7 +76,14 @@ const AddressDetailsComponent = () => {
           />
         </div>
 
-        {loading && <p>Loading transactions...</p>}
+        {loading && (
+          <div className="my-20 flex flex-col justify-center items-center gap-2">
+            <LoadingSpinner size={100} />
+            <Typography variant="h4" className="text-muted-foreground">
+              Loading Transactions
+            </Typography>
+          </div>
+        )}
         {error && <p>Error fetching transactions: {error}</p>}
 
         {!loading && !error && (

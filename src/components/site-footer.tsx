@@ -81,7 +81,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2 border-t py-4 sm:flex sm:flex-row sm:items-center sm:justify-between">
           <div className="flex space-x-5 sm:mt-0 sm:justify-center">
             {footerSocials.map((social) => (
-              <a
+              <Link
                 key={social.name}
                 href={social.href}
                 className="fill-gray-500 text-gray-500 hover:fill-gray-900 hover:text-gray-900 dark:hover:fill-gray-600 dark:hover:text-gray-600"
@@ -89,7 +89,7 @@ export function SiteFooter() {
               >
                 {social.icon}
                 <span className="sr-only">{social.name}</span>
-              </a>
+              </Link>
             ))}
           </div>
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">

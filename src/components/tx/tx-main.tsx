@@ -39,7 +39,15 @@ const TransactionDetailsComponent = () => {
   );
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <Container>
+        <div className="flex flex-col justify-center items-center mt-8 min-h-[50vh]">
+          <Typography variant="small" className="text-muted-foreground">
+            Error: {error}
+          </Typography>
+        </div>
+      </Container>
+    );
   }
 
   if (!transactionDetails) {
