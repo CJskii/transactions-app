@@ -102,7 +102,7 @@ const TransactionDetailsComponent = () => {
           </CardHeader>
           <CardContent>
             <ul className="grid gap-3">
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between break-all">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">Transaction Hash</span>
                 <Link
                   href={explorerUrl}
@@ -112,15 +112,15 @@ const TransactionDetailsComponent = () => {
                   {transactionDetails.hash}
                 </Link>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between break-all">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">Block Hash</span>
                 <span>{blockHash}</span>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Block Number</span>
                 <span>{parseInt(blockNumber, 16)}</span>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between break-all">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">From</span>
                 <Link
                   href={`/address/${chainId}/${from}`}
@@ -129,7 +129,7 @@ const TransactionDetailsComponent = () => {
                   <span>{from}</span>
                 </Link>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between break-all">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between break-all">
                 <span className="text-muted-foreground">To</span>
                 <Link
                   href={`/address/${chainId}/${to}`}
@@ -138,21 +138,21 @@ const TransactionDetailsComponent = () => {
                   <span>{to}</span>
                 </Link>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Value</span>
                 <span>
                   {transactionValue} {nativeCurrency}
                 </span>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Gas Used</span>
                 <span>{parseInt(gasUsed, 16)}</span>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Gas Price</span>
                 <span>{ethers.utils.formatUnits(gasPrice, "gwei")} Gwei</span>
               </li>
-              <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <li className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <span className="text-muted-foreground">Transaction Fee</span>
                 <span>
                   {transactionFee} {nativeCurrency}

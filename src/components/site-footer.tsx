@@ -20,7 +20,7 @@ export const footerSocials = [
 
 export function SiteFooter() {
   return (
-    <footer>
+    <footer className="border-t-[1px] border-accent dark:bg-black/50">
       <div className="mx-auto w-full max-w-screen-xl px-4">
         <div className="gap-4 p-4 py-16 sm:pb-16 md:flex md:justify-between">
           <div className="mb-12 flex flex-col gap-4">

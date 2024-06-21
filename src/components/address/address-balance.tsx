@@ -1,7 +1,6 @@
 import { useBalance } from "@/hooks/useBalance";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Typography } from "@/components/ui/typography";
 import { Separator } from "@radix-ui/react-separator";
 
 interface BalanceComponentProps {
@@ -58,7 +57,7 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({
   explorerUrl,
 }) => {
   return (
-    <Card className="overflow-hidden md:w-2/6 w-full h-fit bg-transparent my-8">
+    <Card className="overflow-hidden lg:w-2/6 md:w-3/6 w-full h-fit bg-transparent my-8">
       <CardHeader className="flex flex-col items-start justify-center gap-2">
         <CardTitle className="group flex items-center gap-2 text-xl tracking-wider text-left">
           Overview
@@ -68,17 +67,17 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({
       <CardContent className="p-6 text-sm">
         <div className="grid gap-3">
           <ul className="grid gap-3">
-            <li className="flex items-center justify-between">
+            <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <span className="text-muted-foreground">Current network</span>
               <span className="">{networkName}</span>
             </li>
-            <li className="flex items-center justify-between">
+            <li className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <span className="text-muted-foreground">Balance</span>
-              <span className="">
+              <span className="break-all">
                 {balance} {nativeCurrency}{" "}
               </span>
             </li>
-            <li className="flex items-center justify-between">
+            <li className="flex flex-col md:flex-row items-start md:items-center  justify-between">
               <span className="text-muted-foreground">{explorerName} link</span>
               <Link
                 href={explorerUrl}

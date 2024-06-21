@@ -39,7 +39,7 @@ export function SiteHeader() {
 
   return (
     <div className="fixed z-50 flex w-full justify-between items-center border-b border-neutral-400/50 bg-white/50 p-4 backdrop-blur-xl dark:bg-black/50 md:px-16 md:py-4">
-      <div className="flex-1 md:block hidden">
+      <div className="flex-1 lg:block hidden">
         <Link href={"/"}>
           <Typography variant="h2" className="text-2xl font-bold">
             Tx Checker
@@ -47,16 +47,13 @@ export function SiteHeader() {
         </Link>
       </div>
 
-      <div className="flex-1 flex justify-center items-center gap-3">
-        {/* Navi Links  */}
-      </div>
-
-      <div className="flex-1 justify-end items-center gap-3 lg:flex w-full">
+      <div className="flex-1 flex justify-center items-center gap-3 w-full md:w-auto">
         <Input
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Enter address or transaction hash"
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
+          className="w-full md:w-auto"
         />
         <SelectChainDropdown
           selectedChainName={selectedChainName}

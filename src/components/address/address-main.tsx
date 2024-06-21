@@ -56,7 +56,7 @@ const AddressDetailsComponent = () => {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center w-full md:mt-4 mt-12">
-        <div className="flex flex-col md:flex-row justify-start items-center p-4 gap-4 w-full">
+        <div className="flex flex-col md:flex-row justify-start items-center p-4 gap-4 w-full break-all">
           <Typography variant={"h4"}>Address: </Typography>
           <Typography
             variant={"small"}
