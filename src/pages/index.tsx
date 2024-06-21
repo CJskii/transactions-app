@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Inter as FontSans } from "next/font/google";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -40,7 +39,7 @@ export default function HomePage() {
         <h1>Welcome to Transactions App</h1>
         <p>This is a provisional landing page.</p>
 
-        <div className="flex justify-center items-center gap-4">
+        <div className="md:flex justify-center items-center gap-4">
           <Link href={`/address/${defaultChainId}/${defaultWallet}`}>
             <Button className="ml-2">Search Address</Button>
           </Link>
