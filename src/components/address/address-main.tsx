@@ -84,7 +84,10 @@ const AddressDetailsComponent = () => {
 
         {!loading && !error && (
           <div className="w-full">
-            <TransactionTable transactions={transactions} />
+            <TransactionTable
+              transactions={transactions}
+              chainId={selectedChainId}
+            />
           </div>
         )}
       </div>
