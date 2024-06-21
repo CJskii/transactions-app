@@ -23,6 +23,8 @@ export const fetchTransactions = async (address: string, chainId: number) => {
 
   if (response.data.status === "1") {
     return response.data.result;
+  } else if (response.data.status === "0") {
+    return [];
   } else {
     throw new Error(response.data.message || "Error fetching transactions");
   }
